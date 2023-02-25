@@ -11,8 +11,6 @@ class Pessoa {
 		$this->peso = $peso;
 
 	}
-
-	function
 }
 
 $pessoaUm = new Pessoa("Joao",35);
