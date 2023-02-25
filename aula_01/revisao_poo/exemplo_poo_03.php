@@ -9,10 +9,7 @@ class Pessoa {
 		$this->idade = $idade;
 		$this->altura = $altura;
 		$this->peso = $peso;
-
 	}
-
-	function
 }
 
 $pessoaUm = new Pessoa("Joao",35);
