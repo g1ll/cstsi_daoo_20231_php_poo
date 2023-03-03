@@ -30,4 +30,5 @@ class Pessoa
 	public function __get($name){
 		return $this->$name;
 	}
+
 }
