@@ -1,4 +1,28 @@
 ## CSTSI - DAOO - Aula 03: 
+
+### Ferramentas
+
+[COMPOSER](https://getcomposer.org/):
+
+Instalação do Composer :
+
+[Instruções para Windows](https://getcomposer.org/doc/00-intro.md#installation-windows)
+
+
+[Linux ou Mac](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos)
+
+[PYSH](https://psysh.org/):
+
+Ferramenta REPL para php.
+Instalação global pelo composer:
+```bash
+ composer g require psy/psysh:@stable 
+```
+Configure o composer no PATH do sistema.
+
+Maires detalhes no repositório da [psysh](https://github.com/bobthecow/psysh).
+
+
 ### PHP PDO E MVC
 
 Para realizar a atividade da Aula 03 clone este repositório.
