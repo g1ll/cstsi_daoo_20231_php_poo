@@ -6,6 +6,7 @@ use Daoo\Aula03\controller\api\Produto;
 
 Route::routes([
 	'produto' => Produto::class,
+	// 'desconto' => Desconto::class
 	// 'usuario' => Usuaraio::class
 ]);
 
