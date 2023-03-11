@@ -20,7 +20,7 @@ Instalação global pelo composer:
 ```
 Configure o composer no PATH do sistema.
 
-Maires detalhes no repositório da [psysh](https://github.com/bobthecow/psysh).
+Mais detalhes no repositório da [psysh](https://github.com/bobthecow/psysh).
 
 
 ### PHP PDO E MVC
