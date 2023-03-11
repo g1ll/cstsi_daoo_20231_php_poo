@@ -2,14 +2,14 @@
 
 namespace Daoo\Aula03\model;
 
-use Daoo\Aula03\model\Connection;
 use Exception;
 use PDO;
 
 class ORM
 {
-    protected $table;
     protected $conn;    //connection
+
+    protected $table;   //tableName
     protected $columns; //columnNames
     protected $params;  //:columnNames
     protected $updated; //set columnNames=:columnNames
@@ -20,6 +20,10 @@ class ORM
     public function __construct()
     {
         $this->conn = Connection::getConnection();
+        $this->resetMappers();
+    }
+
+    private function resetMappers(){
         $this->filters = '1';
         $this->columns = '';
         $this->params = '';
@@ -29,6 +33,9 @@ class ORM
 
     protected function mapColumns(iDAO $daoInterface)
     {
+        if(count($this->values))
+            $this->resetMappers();
+
         if (isset($daoInterface)) {
             foreach ($daoInterface->getColumns() as $key => $value) {
                 $this->params .= " :$key,";
@@ -45,6 +52,8 @@ class ORM
 
     protected function setFilters($arrayFilter)
     {
+        $this->filters='1';
+        $this->values=[];
         foreach ($arrayFilter as $key => $value) {
             $this->filters .= " AND `$key` like :$key";
             $this->values[":$key"] = "%$value%";

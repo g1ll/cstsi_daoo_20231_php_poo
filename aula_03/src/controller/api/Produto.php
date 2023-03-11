@@ -12,7 +12,7 @@ class Produto extends Controller
 	{
 		$this->setHeader();
 		$this->model = new ProdutoModel();
-		error_log(print_r($this->model, TRUE));
+		// error_log(print_r($this->model, TRUE));
 	}
 
 	public function index()
@@ -32,7 +32,7 @@ class Produto extends Controller
 		echo json_encode($response);
 	}
 
-	public function create()
+	public function store()
 	{
 		try {
 			$this->validateProdutoRequest();
@@ -43,6 +43,7 @@ class Produto extends Controller
 				$_POST['quantidade'],
 				$_POST['preco']
 			);
+
 			$this->model->importado = isset($_POST['importado']);
 
 			// error_log(print_r($this->model,TRUE));
@@ -55,19 +56,19 @@ class Produto extends Controller
 				]);
 			else throw new \Exception("Erro ao criar produto!");
 		} catch (\Exception $error) {
+			$this->setHeader(500,'Erro interno do servidor!!!!');
 			echo json_encode([
 				"error" => $error->getMessage()
 			]);
 		}
 	}
 
-
 	public function update()
 	{
 		try {
-			if (!isset($_POST["id"]))
-				throw new \Exception('Erro: id obrigatorio!');
-
+			if(!$this->validatePostRequest(['id']))
+				throw new Exception("Informe o ID do Produto!!");
+			
 			$this->validateProdutoRequest();
 
 			$this->model = new ProdutoModel(
@@ -98,23 +99,24 @@ class Produto extends Controller
 	public function remove()
 	{
 		try {
-			if (!isset($_POST["id"]))
+			if (!isset($_POST["id"])){
+				$this->setHeader(400,'Bad Request.');
 				throw new \Exception('Erro: id obrigatorio!');
+			}
 			$id = $_POST["id"];
 			if ($this->model->delete($id)) {
 				$response = ["message:" => "Produto id:$id removido com sucesso!"];
 			} else {
+				$this->setHeader(500,'Internal Error.');
 				throw new Exception("Erro ao remover Produto!");
 			}
 			echo json_encode($response);
 		} catch (\Exception $error) {
-			header('HTTP/1.0 404 Not Found');
 			echo json_encode([
 				"error" => $error->getMessage()
 			]);
 		}
 	}
-
 
 	private function validateProdutoRequest()
 	{
